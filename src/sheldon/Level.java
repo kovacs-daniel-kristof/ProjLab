@@ -55,7 +55,7 @@ public class Level {
 					railek.add(rails.get(Integer.parseInt(splitted[j])));
 
 				rails.get(i).setNeighbours(railek, Integer.parseInt(splitted[3]));
-
+//
 			}
 
 		} catch (IOException e) {
