@@ -7,7 +7,7 @@ public class CoalCargo extends TrainPart {
     CoalCargo(){
         hasPassengers=false;
         // a coalCargon sose utaznak
-        color =Color.NONE;
+        myColor =Color.NONE;
     }
 
 }

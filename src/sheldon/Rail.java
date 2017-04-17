@@ -45,19 +45,11 @@ public class Rail {
 		return false;
 	}
 
-
-
-	public void ChangeDirection() {
+	public void ChangeDirection(){
 	}
 	public void ChangeGate(){
 	}
 	public void changecolor(Color c){
-	}
-	public boolean isWaitingPassengerSameColor(Color c){
-		return false; // ha nem station akkor mindig false
-	}
-	public boolean RandomGetOn(){
-		return false;
 	}
 
     public boolean passengerGetOn(Color myColor) {
