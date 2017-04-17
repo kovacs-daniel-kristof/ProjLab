@@ -6,7 +6,7 @@ public class SpecialRail extends Rail{
 boolean isActive = false;
 
 public void Activate (){ // kapu lesz belőle
-	System.out.println("SpecialRail has been activated!");
+	System.out.println("SpecialRail has been activatedo!");
 	isActive = true;
 }
 public void Deactivate (){ // visszaáll special railba
