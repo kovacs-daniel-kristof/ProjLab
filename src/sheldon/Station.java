@@ -1,27 +1,34 @@
 package sheldon;
 
+import java.util.ArrayList;
+
 public class Station extends Rail {
+	Color myColor;
+	ArrayList<Color> waitingPassengers;
+
 	public Station(){
 	}
-Color myColor;
 
-public boolean CompareColors (){
-	System.out.println("Yes the color is matching! We both swept right ;) - claimed the station to the carriage");
-	return true;
-}
-@Override
-public boolean GetOffTheTrain (){
-	System.out.println("The passangers can get off this carriage! - it's mine, not yours. - ordered the station, to the astonished passangers");
-	return true;
+
+	public boolean CompareColors(Color c){
+		return c.equals(myColor);
+	}
+
+
+	public void changecolor (Color c){
+		myColor = c;
+	}
+
+	public void setWaitingPassengers(ArrayList<Color> wp){
+		waitingPassengers = wp;
+	}
+
+	public boolean hasWaitingPassengers(){
+		if(waitingPassengers.size()>0)
+			return true;
+		else
+			return false;
+	}
+
 }
 
-public boolean CanGetOn(){
-	//ádám írd meg a logikáját 0 vagy 1 ret ad random
-	return true;
-}
-
-public void changecolor (Color c){
-myColor = c;
-}
-
-}

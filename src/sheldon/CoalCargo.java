@@ -5,7 +5,9 @@ package sheldon;
  */
 public class CoalCargo extends TrainPart {
     CoalCargo(){
-        hasPassengers=false; // a coalCargon sose utaznak
+        hasPassengers=false;
+        // a coalCargon sose utaznak
+        color =Color.NONE;
     }
 
 }
