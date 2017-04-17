@@ -11,7 +11,7 @@ public boolean CompareColors (){
 }
 @Override
 public boolean GetOffTheTrain (){
-	System.out.println("The passangers can get off this carriage! - it is mine, not yours. - ordered the station, to the astonished passangers");
+	System.out.println("The passangers can get off this carriage! - it's mine, not yours. - ordered the station, to the astonished passangers");
 	return true;
 }
 
