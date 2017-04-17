@@ -2,7 +2,7 @@ package sheldon;
 
 public abstract class TrainPart {
 	public TrainPart(){
-
+		hasPassengers = false;
 	}
 protected TrainPart behindMe;
 protected TrainPart inFrontOfMe;
@@ -22,10 +22,21 @@ protected Color myColor;
 		currentRail.AddTrainToRail(this); // az új sínen a vonatot is eltároljuk
 
 	}
-	public boolean HasPassenger (){// űlnek e a vonaton
-		System.out.println("This carriage has passangers : " + hasPassengers);
-		return hasPassengers;
+	public boolean HasPassenger(){// űlnek e a vonaton
+
+		if(inFrontOfMe != null){
+			if(inFrontOfMe.HasPassenger())			//rekurzivan megnezzuk, hogy az elotte ulo kocsik valamelyiken van e utas
+				return true;						//ha van igazzal terunk vissza
+		}
+		if(hasPassengers)
+			return true;							//ha nincs, megnezzuk hogy az utolso kocsin van e utas
+		else
+			return false;
 	}
+
+
+
+
 	public boolean HasNextTrain(){
 		return behindMe!=null;
 		//ellenőrzii hogy van e mögötte vonat
