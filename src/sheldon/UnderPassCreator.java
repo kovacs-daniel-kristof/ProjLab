@@ -3,55 +3,87 @@ package sheldon;
 import java.util.ArrayList;
 
 public class UnderPassCreator {
-	public UnderPassCreator(){
 
-	}
 	ArrayList<SpecialRail> underPassEdges = new ArrayList<SpecialRail>();
 	ArrayList<Rail> railList = new ArrayList<Rail>();
-	public void Generate (){//amikor egyik special rail se aktív akkor a special rail-ből kapu lesz
-		System.out.println("Underpass is under construction");
-		System.out.println("...");
-		System.out.println("...");
-		System.out.println("Underpass created! was fast");
+	int temporaryUPLength = 4; //amíg nem lehet a gui alapján távolságot számolni, ilyen hosszú lesz az alagút; minimum 1-nek kell lennie!
+
+	public UnderPassCreator(){}
+
+
+	public void Generate () //amikor egyik special rail se aktĂ­v akkor a special rail-bĹ‘l kapu lesz
+	{
+
+		for (int i = 0; i < temporaryUPLength; i++) //létrehozza az alagútban levő síneket
+		{
+			railList.add(new Rail());
+		}
+		if (railList.size() == 1)
+			railList.get(0).setNeighbours(underPassEdges.get(0), underPassEdges.get(1));
+		else if (railList.size() == 2)
+		{
+			railList.get(0).setNeighbours(underPassEdges.get(0), railList.get(1));
+			railList.get(1).setNeighbours(railList.get(0), underPassEdges.get(0));
+		}
+		else
+		{
+			railList.get(0).setNeighbours(underPassEdges.get(0), railList.get(1));
+			for (int i = 1; i < railList.size()-1; i++) // beállítja a sínek szomszédait
+			{
+				railList.get(i).setNeighbours(railList.get(i-1), railList.get(i+1));
+			}
+			railList.get(railList.size()-1).setNeighbours(railList.get(railList.size()-2), underPassEdges.get(1));
+		}
+		underPassEdges.get(0).setNeighbours(railList.get(0), null);
+		underPassEdges.get(1).setNeighbours(railList.get(railList.size()-1), null);
+
 	}
-	
-public void AddGate (){
-	int hey = GetSpecialRailActive();
-	if(hey == 0){//amikor egyik special rail se aktív akkor a special rail-ből kapu lesz
-		System.out.println("A gate added! -yea  - says the UPC " );
-		SpecialRail asd = new SpecialRail();
-		underPassEdges.add(asd);
-	}
-	if(hey == 1){// ha már van egy kapu akkor is krelódik még egy, ezután pedig létrejön az alagút a két kapu között
-		System.out.println("A gate added! More more more!  - says the UPC with a strange smile. Threesome :D");
-		SpecialRail asd = new SpecialRail();
-		underPassEdges.add(asd);
-		Generate();
-		// ha már 2 kapu van akkor nem tud továbbit hozzáadni
-	}
-}
-public int GetSpecialRailActive (){
-	System.out.println("This many SpecialRail is active : " + underPassEdges.size());
-	return underPassEdges.size();// megadja hogy jelenleg hány special rail viselkedik kapuként
-}
-public void RemoveGate (){
-	int hey = GetSpecialRailActive();
-	if(hey != 0 && !UPhasTrain()){
-		if(hey == 2){
-			System.out.println("A gate removed - noo, I'm gonna miss you - says the UPC");
-			Remove(); // eltünteti az alagutat, megszünnek az alagút sinei
-			underPassEdges.remove(0);
-		}else{
-			System.out.println("A gate removed- noo, I'm alone again T_T - cried the UPC");
-			underPassEdges.remove(0);
+
+	public void AddGate (SpecialRail newSpecialRail){
+		int railsActive = GetSpecialRailActive();
+		if(railsActive == 0)	//amikor egyik special rail se aktĂ­v akkor a special rail-bĹ‘l kapu lesz
+		{
+			underPassEdges.add(newSpecialRail);
+		}
+		if(railsActive == 1) // ha mĂˇr van egy kapu akkor is krelĂłdik mĂ©g egy, ezutĂˇn pedig lĂ©trejĂ¶n az alagĂşt a kĂ©t kapu kĂ¶zĂ¶tt
+		{
+			underPassEdges.add(newSpecialRail);
+			Generate();
+			underPassEdges.get(0).Activate();
+			underPassEdges.get(1).Activate();
+			// ha mĂˇr 2 kapu van akkor nem tud tovĂˇbbit hozzĂˇadni
 		}
 	}
-}
-public boolean UPhasTrain (){// amíg van vonat addig nem szűnhet meg az alagút
-	System.out.println("There's no one inside me ;) - complained the UPC");
-	return false;
-}
-	public void Remove (){
-		System.out.println("The underpass is being destroyed! It was hard to hold - says the UPC");
+	public int GetSpecialRailActive (){
+
+		return underPassEdges.size();// megadja hogy jelenleg hĂˇny special rail viselkedik kapukĂ©nt
+	}
+	public void RemoveGate (SpecialRail specialRailToRemove){
+		int gates = GetSpecialRailActive();
+		if (gates == 1)
+		{
+			underPassEdges.remove(specialRailToRemove);
+		}
+		if(gates == 2 && !UPhasTrain())
+		{
+			underPassEdges.get(0).Deactivate();
+			underPassEdges.get(1).Deactivate();
+			underPassEdges.remove(specialRailToRemove);
+			Remove();
+		}
+
+	}
+	public boolean UPhasTrain (){// amĂ­g van vonat addig nem szĹ±nhet meg az alagĂşt
+		boolean hastrain = false;
+		for (int i=0; i < railList.size(); i++)
+		{
+			if (railList.get(i).HasTrain())
+				hastrain = true;
+		}
+		return hastrain;
+	}
+	public void Remove ()
+	{
+		railList.clear();
 	}
 }
