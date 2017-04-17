@@ -15,6 +15,11 @@ public boolean GetOffTheTrain (){
 	return true;
 }
 
+public boolean CanGetOn(){
+	//ádám írd meg a logikáját 0 vagy 1 ret ad random
+	return true;
+}
+
 public void changecolor (Color c){
 myColor = c;
 }
