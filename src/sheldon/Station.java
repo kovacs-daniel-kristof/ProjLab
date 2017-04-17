@@ -3,8 +3,8 @@ package sheldon;
 import java.util.ArrayList;
 
 public class Station extends Rail {
-	Color myColor;
-	ArrayList<Color> waitingPassengers;
+	private Color myColor;
+	private ArrayList<Color> waitingPassengers;
 
 	public Station(){
 	}
@@ -29,6 +29,15 @@ public class Station extends Rail {
 		else
 			return false;
 	}
+@Override
+public boolean isWaitingPassengerSameColor(TrainPart tp){
+	for(int i =0; i<waitingPassengers.size();i++){
+		if(waitingPassengers.equals(tp.getColor())){
+			return true;
+		}
+	}
+	return  false;
+}
 
 }
 

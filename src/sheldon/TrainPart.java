@@ -1,13 +1,15 @@
 package sheldon;
+import java.util.Random;
 
 public abstract class TrainPart {
 	public TrainPart(){
 
 	}
-protected TrainPart behindMe;
-protected TrainPart inFrontOfMe;
-protected Rail currentRail;
-protected boolean hasPassengers ;
+	protected TrainPart behindMe;
+	protected TrainPart inFrontOfMe;
+	protected Rail currentRail;
+	protected boolean hasPassengers ;
+	protected Color color;
 
 	public  void MoveToRail (Rail next){
 		Rail tmp=currentRail; // tmpbe tároljuk azt a sínt ahonnan ellépünk
@@ -29,6 +31,11 @@ protected boolean hasPassengers ;
 		return behindMe!=null;
 		//ellenőrzii hogy van e mögötte vonat
 	}
+	public Color getColor(){
+		return color;
+	}
+
+
 
 
 }
