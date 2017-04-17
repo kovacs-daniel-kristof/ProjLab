@@ -53,18 +53,14 @@ public class Rail {
 	}
 	public void changecolor(Color c){
 	}
-	public boolean isWaitingPassengerSameColor(TrainPart tp){
+	public boolean isWaitingPassengerSameColor(Color c){
 		return false; // ha nem station akkor mindig false
 	}
 	public boolean RandomGetOn(){
-		Random rand = new Random();
-		int n = rand.nextInt(10);
-		if(n>=5){
-			return true;
-		}
-		else {
-			return  false;
-		}
+		return false;
 	}
 
+    public boolean passengerGetOn(Color myColor) {
+	    return false;
+    }
 }
