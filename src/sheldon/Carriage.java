@@ -13,7 +13,7 @@ public void MoveToRail (Rail next){ // következő sínre mozgat
 		MoveToRail(tmp);
 		// ha van mögött kocsi akkor rekurzívan azon is meghívjuk a mozgatásta
 	}
-	boolean isSameColor = currentRail.CompareColors(color);//my color összehasonlítása
+	boolean isSameColor = currentRail.CompareColors(myColor);//my color összehasonlítása
 		//leszállás
 	if(!inFrontOfMe.HasPassenger() && HasPassenger()){
 			if(isSameColor){
@@ -33,6 +33,8 @@ public void MoveToRail (Rail next){ // következő sínre mozgat
 			hasPassengers=true;
 			Program.EmptyTrainCounterMinus();
 		}
+
+
 
 }
 }

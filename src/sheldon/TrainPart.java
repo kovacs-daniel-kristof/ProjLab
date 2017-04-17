@@ -30,7 +30,11 @@ protected Color myColor;
 		return behindMe!=null;
 		//ellenőrzii hogy van e mögötte vonat
 	}
-	public abstract void move();
+	public  void move(){
 
+    }
 
+    public Color getMyColor() {
+        return myColor;
+    }
 }

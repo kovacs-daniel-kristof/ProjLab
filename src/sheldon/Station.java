@@ -29,14 +29,15 @@ public class Station extends Rail {
 		else
 			return false;
 	}
-@Override
+
 public boolean isWaitingPassengerSameColor(TrainPart tp){
 	for(int i =0; i<waitingPassengers.size();i++){
-		if(waitingPassengers.equals(tp.getColor())){
+		if(waitingPassengers.equals(tp.getMyColor())){
 			return true;
 		}
+
 	}
-	return  false;
+	return false;
 }
 
 }
