@@ -1,5 +1,7 @@
 package sheldon;
 
+import java.util.Random;
+
 public class Rail {
 	Rail[] neighbours = new Rail[2];
 	TrainPart myTrainPart;
@@ -51,6 +53,18 @@ public class Rail {
 	}
 	public void changecolor(Color c){
 	}
-
+	public boolean isWaitingPassengerSameColor(TrainPart tp){
+		return false; // ha nem station akkor mindig false
+	}
+	public boolean RandomGetOn(){
+		Random rand = new Random();
+		int n = rand.nextInt(10);
+		if(n>=5){
+			return true;
+		}
+		else {
+			return  false;
+		}
+	}
 
 }
