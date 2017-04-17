@@ -11,6 +11,7 @@ public class Level {
 	public UnderPassCreator u_p_c;
 
 	public Level(String levelname, String trainname){
+		int haspassanger = 0;
 		try (BufferedReader br = new BufferedReader(new FileReader(levelname))) {
 
 			String CurrentLine;
@@ -76,6 +77,9 @@ public class Level {
 					train = new CoalCargo();
 				}
 				train.currentRail = rails.get(Integer.parseInt(splitted[1]) - 1);
+				if(Integer.parseInt(splitted[6]) == 1){
+					haspassanger++;
+				}
 				train.hasPassengers = Integer.parseInt(splitted[6]) == 1;
 				train.myColor = Color.valueOf(splitted[5]);
 				train.inFrontOfMe = null;
@@ -96,7 +100,7 @@ public class Level {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		Program.Emptytraincount = haspassanger;
 	}
 
 

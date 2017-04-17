@@ -165,7 +165,7 @@ public class Program {
     }
 
     static public void EmptyTrainCounterMinus(){
-Emptytraincount--;
+        Emptytraincount--;
 
     }
 }
