@@ -1,6 +1,8 @@
 package sheldon;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 
@@ -37,6 +39,17 @@ public class Program {
     static public Program m;
     //public ArrayList<Level> levelList = new ArrayList<Level>();
 
+    public class MoveTrains extends TimerTask {
+
+        @Override
+        public void run() {
+            // TODO Auto-generated method stub
+            Program.m.levels.get(Program.m.currentLevel).MoveEngines();
+        }
+
+
+    }
+
     static public void main (String[] args){
         m = new Program();
         m.Init();
@@ -64,12 +77,18 @@ public class Program {
                             m.levels.get(m.currentLevel).rails.get(3).ChangeDirection();
                         break;
                     case "2":
-                        if(gameHasStarted)
-                            m.levels.get(m.currentLevel).u_p_c.AddGate();
+                        if(gameHasStarted) {
+                            System.out.println("Which SpecialRail?");
+                            line = br.readLine();
+                            m.levels.get(m.currentLevel).u_p_c.AddGate((SpecialRail) m.levels.get(m.currentLevel).rails.get(Integer.parseInt(line) -1));
+                        }
                         break;
                     case "3":
-                        if(gameHasStarted)
-                            m.levels.get(m.currentLevel).u_p_c.RemoveGate();
+                        if(gameHasStarted) {
+                            System.out.println("Which Gate?");
+                            line = br.readLine();
+                            m.levels.get(m.currentLevel).u_p_c.RemoveGate((SpecialRail) m.levels.get(m.currentLevel).rails.get(Integer.parseInt(line) -1));
+                        }
                         break;
                     case "4":
                         m.levels.get(m.currentLevel).rails.get(5).ChangeGate();
@@ -153,6 +172,8 @@ public class Program {
 
     public void StartGame(){
         gameHasStarted = true;
+        Timer timer = new Timer();
+        timer.schedule(new MoveTrains(), 0, 500);
     }
 
     static public void GameOver (){

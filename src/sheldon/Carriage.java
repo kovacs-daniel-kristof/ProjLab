@@ -17,21 +17,19 @@ public void MoveToRail (Rail next){ // következő sínre mozgat
 		//leszállás
 	if(!inFrontOfMe.HasPassenger() && HasPassenger()){
 			if(isSameColor){
-				System.out.println("I'm at a station, and the colors are matching - told by a carriage");
-				System.out.println("So passangers, get off.. - shouted the carriage");
 				 hasPassengers= false;// leszállnak utasok
 					Program.EmptyTrainCounterPlusPlus(); // egyel növeljük az üres kocsik számát
 
 			}
 		}
 		//felszállás
-		if(currentRail.hasWaitingPassengers()&&!hasPassengers&&currentRail.isWaitingPassengerSameColor(this)
-				&&currentRail.RandomGetOn()){
+		if(currentRail.hasWaitingPassengers()&&!hasPassengers){
 			//akkor szállhatnak fel ha vannak várakozó utasok és a kocsi üres,
-			// és a várakozó utasok közül van olyan akinek a szine megegyezik a kocsi szinével
-			// és az utasnak van kedve felszállni
-			hasPassengers=true;
-			Program.EmptyTrainCounterMinus();
+
+			if(currentRail.passengerGetOn(myColor)){    //ha szalltak fel utasok, akkor
+				hasPassengers=true;
+				Program.EmptyTrainCounterMinus();        //ures kocsik szamat levisszuk egyel
+			}
 		}
 
 

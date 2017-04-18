@@ -20,12 +20,15 @@ public class Switch extends Rail {
 		}
 	}
 
-	public void setNeighbourSwitch(Rail nb1, ArrayList<Rail> jc){
-		junctions = jc;
-		neighbours[0] = nb1;
-		neighbours[1] = junctions.get(0);
-		n = 0;
+	public void setNeighbours(ArrayList<Rail> railek, int allas){
+		neighbours[0] = railek.get(0);
+		railek.remove(0);
+		junctions = railek;
+		n = allas;
+		neighbours[1] = junctions.get(n);
+
 	}
+
 
 }
 

@@ -17,40 +17,52 @@ public class Level {
 			String CurrentLine;
 
 			/*első paramétere a sín ID-ja
-			második paramétere: melyik sín van előtte
-			harmadik paramétere: melyik sín van utána
-			negyedik paramétere: A sín típusa (1-Rail, 2-SpecialRail, 3-Switch, 4- station, 5-Cross)
-			ötödik paraméter: Szín (csak a stationnek lehet)*/
-
+			második paramétere: A sín típusa (1-Rail, 2-SpecialRail, 3-Switch, 4- station, 5-Cross)
+			harmadik paraméter: Szín (csak a stationnek lehet)
+			negyedik paraméter: váltó iránya, ha nem váltó akkor 0;
+			további paramétere: melyik sín van előtte
+			további paramétere: melyik sín van utána
+			*/
+			ArrayList<String> readedrail = new ArrayList<String>();
 			while ((CurrentLine = br.readLine()) != null) {
+
+				readedrail.add(CurrentLine);
 				String[] splitted = CurrentLine.split(" ");
 				Rail temprail = null;
-				if(Integer.parseInt(splitted[3]) == 1){
+				if(Integer.parseInt(splitted[1]) == 1){
 					temprail = new Rail();
 				}
-				if(Integer.parseInt(splitted[3]) == 2){
+				if(Integer.parseInt(splitted[1]) == 2){
 					temprail = new SpecialRail();
 				}
-				if(Integer.parseInt(splitted[3]) == 3){
+				if(Integer.parseInt(splitted[1]) == 3){
 					temprail = new Switch();
 				}
-				if(Integer.parseInt(splitted[3]) == 4){
+				if(Integer.parseInt(splitted[1]) == 4){
 					temprail = new Station();
-					temprail.changecolor(Color.valueOf(splitted[4]));
+					temprail.changecolor(Color.valueOf(splitted[2]));
 				}
-				if(Integer.parseInt(splitted[3]) == 5){
+				if(Integer.parseInt(splitted[1]) == 5){
 					temprail = new Crossing();
 				}
-				temprail.neighbours[0] = rails.get(Integer.parseInt(splitted[1]) -1);
-				temprail.neighbours[1] = rails.get(Integer.parseInt(splitted[2]) -1);
+
 				rails.add(temprail);
+			}
+			for(int i = 0; i < readedrail.size(); i++){
+				String[] splitted = readedrail.get(i).split(" ");
+				ArrayList<Rail> railek = new ArrayList<Rail>();
+				for(int j = 4; j < splitted.length; j++)
+					railek.add(rails.get(Integer.parseInt(splitted[j])));
+
+				rails.get(i).setNeighbours(railek, Integer.parseInt(splitted[3]));
+//
 			}
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
-		try (BufferedReader br = new BufferedReader(new FileReader(levelname))) {
+		try (BufferedReader br = new BufferedReader(new FileReader(trainname))) {
 
 			String CurrentLine;
 			/*
@@ -68,20 +80,27 @@ public class Level {
 					TrainPart train = null;
 				if(Integer.parseInt(splitted[5]) == 1){//engine
 					train = new Engine();
+					train.myColor = Color.NONE;
+					haspassanger++;
 				}
 				if(Integer.parseInt(splitted[5]) == 2){ //carriage
 					train = new Carriage();
-
+					train.myColor = Color.valueOf(splitted[5]);
+					train.hasPassengers = Integer.parseInt(splitted[6]) == 1;
+					if(Integer.parseInt(splitted[6]) == 0){
+						haspassanger++;
+					}
 				}
 				if(Integer.parseInt(splitted[5]) == 3){ //CoalCargo
 					train = new CoalCargo();
-				}
-				train.currentRail = rails.get(Integer.parseInt(splitted[1]) - 1);
-				if(Integer.parseInt(splitted[6]) == 1){
+					train.myColor = Color.NONE;
 					haspassanger++;
 				}
-				train.hasPassengers = Integer.parseInt(splitted[6]) == 1;
-				train.myColor = Color.valueOf(splitted[5]);
+				train.currentRail = rails.get(Integer.parseInt(splitted[1]) - 1);
+				rails.get(Integer.parseInt(splitted[1]) - 1).AddTrainToRail(train);
+
+
+
 				train.inFrontOfMe = null;
 				train.behindMe = null;
 				trainparts.add(train);
@@ -95,12 +114,17 @@ public class Level {
 				if(Integer.parseInt(splitted[3]) != 0){
 					trainparts.get(i).behindMe = trainparts.get(Integer.parseInt(splitted[3]) -1 );
 				}
+				if(Integer.parseInt(splitted[5]) == 1){//engine
+
+					trainparts.get(i).setPreviousRail(trainparts.get(i).behindMe.currentRail);
+				}
 			}
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		Program.Emptytraincount = haspassanger;
+		u_p_c = new UnderPassCreator();
 	}
 
 

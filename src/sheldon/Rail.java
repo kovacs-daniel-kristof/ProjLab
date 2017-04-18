@@ -1,12 +1,14 @@
 package sheldon;
 
 import java.util.Random;
+import java.util.ArrayList;
 
 public class Rail {
 	Rail[] neighbours = new Rail[2];
 	TrainPart myTrainPart;
+    private Rail[] neig;
 
-	public Rail(){
+    public Rail(){
 	}
 
 	public Rail GetNextRail (Rail r){
@@ -36,35 +38,28 @@ public class Rail {
 			return true;
 		}
 	}
-	public void setNeighbours(Rail r1, Rail r2){
-		neighbours[0] = r1;
-		neighbours[1] = r2;
+	public void setNeighbours(ArrayList<Rail> railek, int allas){
+		neighbours[0] = railek.get(0);
+		neighbours[1] = railek.get(1);
 	}
+
+	public void setNeighbours(Rail nb1, Rail nb2){
+        neighbours[0] = nb1;
+        neighbours[1] = nb2;
+    }
 
 	public boolean hasWaitingPassengers(){
 		return false;
 	}
 
-
-
-	public void ChangeDirection() {
+	public void ChangeDirection(){
 	}
 	public void ChangeGate(){
 	}
 	public void changecolor(Color c){
 	}
-	public boolean isWaitingPassengerSameColor(TrainPart tp){
-		return false; // ha nem station akkor mindig false
-	}
-	public boolean RandomGetOn(){
-		Random rand = new Random();
-		int n = rand.nextInt(10);
-		if(n>=5){
-			return true;
-		}
-		else {
-			return  false;
-		}
-	}
 
+    public boolean passengerGetOn(Color myColor) {
+	    return false;
+    }
 }
