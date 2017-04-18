@@ -33,6 +33,14 @@ public class SpecialRail extends Rail{
 		originalRails = neighbours;
 	}
 
+
+	@Override
+	public void AskID (int a){
+		if(a == 0 || a == 2) {
+			System.out.println("SpecialRail, ID : " + ID);
+		}
+	}
+
 	public void setNeighbours(ArrayList<Rail> railek, int allas){
 		neighbours[0] = railek.get(0);
 		neighbours[1] = railek.get(1);

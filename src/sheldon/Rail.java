@@ -25,7 +25,13 @@ public class Rail {
 	public void setNeighbourSwitch( ArrayList<Rail> jc){
 
 }
-	
+
+public void AskID (int a){
+		if(a == 0) {
+			System.out.println("Rail, ID : " + ID);
+		}
+}
+
 public void Activate(){
 }
 

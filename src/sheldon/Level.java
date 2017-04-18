@@ -40,7 +40,7 @@ public class Level {
 					break;
 				case 1:
 					temprail = new Station();
-					temprail.changecolor(Color.valueOf(splitted[2]));
+					//temprail.changecolor(Color.valueOf(splitted[2]));
 					temprail.ID_des(ID__);
 					break;
 				case 2:
@@ -114,20 +114,27 @@ public class Level {
 					Rail egy = null;
 					Rail ketto = null;
 					for(Rail r : rails){
-						if(r.ID_rep() == Integer.parseInt(splitted[2])){			//Elso szomszed
-							egy = r;
+
+						if(!(splitted[2].trim()).equals("null")) {
+							if (r.ID_rep() == Integer.parseInt(splitted[2])) {            //Elso szomszed
+								egy = r;
+							}
 						}
-						if(r.ID_rep() == Integer.parseInt(splitted[3])){			///masodik szomszed
-							ketto = r;
+						if(!(splitted[3].trim()).equals("null")) {
+							if (splitted[3] != "null" && r.ID_rep() == Integer.parseInt(splitted[3])) {            ///masodik szomszed
+								ketto = r;
+							}
 						}
 					}
 					temprail.setNeighbours(egy, ketto);
 					if(Integer.parseInt(splitted[4]) == 1){				//ha van rajta vonat
 						TrainPart a = null;
 						for(TrainPart t : trainparts){
-							if(t.ID_rep() == Integer.parseInt(splitted[5])){//by ID of train
-								a = t;
-								break;
+							if(!(splitted[5].trim()).equals("null")) {
+								if (t.ID_rep() == Integer.parseInt(splitted[5])) {//by ID of train
+									a = t;
+									break;
+								}
 							}
 						}
 						temprail.AddTrainToRail(a);
@@ -164,11 +171,15 @@ public class Level {
 						Rail harom = null;
 						Rail negy = null;
 						for(Rail r : rails){
-							if(r.ID_rep() == Integer.parseInt(splitted[6])){			//Elso szomszed
-								harom = r;
+							if(!(splitted[6].trim()).equals("null")) {
+								if (r.ID_rep() == Integer.parseInt(splitted[6])) {            //Elso szomszed
+									harom = r;
+								}
 							}
-							if(r.ID_rep() == Integer.parseInt(splitted[7])){			///masodik szomszed
-								negy = r;
+							if(!(splitted[7].trim()).equals("null")) {
+								if (r.ID_rep() == Integer.parseInt(splitted[7])) {            ///masodik szomszed
+									negy = r;
+								}
 							}
 						}
 						temprail.setNeighbours2(harom, negy);
@@ -181,18 +192,19 @@ public class Level {
 						Integer.parseInt(splitted[1]) == 7){
 					TrainPart egy = null;
 					TrainPart ketto = null;
+
 					for(TrainPart r : trainparts){											//visszakeressük a sínt
 						if(r.ID_rep() == Integer.parseInt(splitted[0])){
 							train = r;
 						}
-						if(splitted[2] != "null"){
+						if(!(splitted[2].trim()).equals("null")){
 							if(r.ID_rep() == Integer.parseInt(splitted[2])){
-								train = egy;
+								egy = r;
 							}
 						}
-						if(splitted[3] != "null"){
+						if(!(splitted[3].trim()).equals("null")){
 							if(r.ID_rep() == Integer.parseInt(splitted[3])){
-								train = ketto;
+								ketto = r;
 							}	
 						}
 					}
@@ -200,25 +212,34 @@ public class Level {
 					if(Integer.parseInt(splitted[5]) == 1) haspo = true;
 					Rail harom = null;
 					for(Rail r : rails){
-						if(r.ID_rep() == Integer.parseInt(splitted[4])){			//Elso szomszed
-							harom = r;
+						if(!(splitted[4].trim()).equals("null")) {
+							if (r.ID_rep() == Integer.parseInt(splitted[4])) {            //Elso szomszed
+								harom = r;
+							}
 						}
 					}
-					
+					if(egy == null) egy = new Carriage();
+					if(ketto == null)ketto = new Carriage();
+					if(harom == null) harom = new Rail();
+					if(train == null)
+						System.out.println("Null");
 					train.StandardStartup(egy, ketto,harom, haspo);	//behind_T_ID, in_Front_T_ID, curr_R_ID, hasPass(bool)
 					if(	Integer.parseInt(splitted[1]) == 5){//Engine
+						train.StartSet(Integer.parseInt(splitted[6]));
 						if(Integer.parseInt(splitted[5]) == 1) haspo = true;
 						Rail negy = null;
 						for(Rail r : rails){
-							if(r.ID_rep() == Integer.parseInt(splitted[4])){			//Elso szomszed
-								negy = r;
+							if(!(splitted[7].trim()).equals("null")) {
+								if (r.ID_rep() == Integer.parseInt(splitted[7])) {            //Elso szomszed
+									negy = r;
+								}
 							}
 						}
 						train.ModifyPrevRail(negy);
 					}
 					
 					if(	Integer.parseInt(splitted[1]) == 6){//Carriage
-						train.ModifyCol(Color.valueOf(splitted[5]));
+						train.ModifyCol(Color.valueOf(splitted[6]));
 					}
 				}
 			}
@@ -227,6 +248,7 @@ public class Level {
 		}
 		Program.Emptytraincount = haspassanger;
 		u_p_c = new UnderPassCreator();
+
 	}
 
 

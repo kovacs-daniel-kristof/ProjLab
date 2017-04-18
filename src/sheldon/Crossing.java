@@ -22,4 +22,6 @@ public class Crossing extends Rail{
             return neighbours2[0];
     }
 
+
+
 }

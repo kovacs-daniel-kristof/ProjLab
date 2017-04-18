@@ -44,16 +44,30 @@ public class Program {
                 System.out.println("6 - Start Game");
                 System.out.println("7 - Exit Game");
                 System.out.println("8 - Level Complete(?)");
+                System.out.println("9 - Switch Level");
                 String line;
                 line = br.readLine();
+                int bela = 0;
                 if(line == null) break;
                 switch(line){
                     case "1":
-                        if(gameHasStarted)
-                            m.levels.get(m.currentLevel).rails.get(3).ChangeDirection();
+                        if(gameHasStarted){
+                            bela = 1;
+                            for(Rail r : m.levels.get((m.currentLevel)).rails ){
+                                r.AskID(bela);
+                            }
+
+                            System.out.println("Which Switch?");
+                            line = br.readLine();
+                            m.levels.get(m.currentLevel).rails.get(Integer.parseInt(line) -1).ChangeDirection();
+                        }
                         break;
                     case "2":
                         if(gameHasStarted) {
+                            bela = 2;
+                            for(Rail r : m.levels.get((m.currentLevel)).rails ){
+                                r.AskID(bela);
+                            }
                             System.out.println("Which SpecialRail?");
                             line = br.readLine();
                             m.levels.get(m.currentLevel).u_p_c.AddGate((SpecialRail) m.levels.get(m.currentLevel).rails.get(Integer.parseInt(line) -1));
@@ -61,13 +75,25 @@ public class Program {
                         break;
                     case "3":
                         if(gameHasStarted) {
+                            bela = 2;
+                            for(Rail r : m.levels.get((m.currentLevel)).rails ){
+                                r.AskID(bela);
+                            }
                             System.out.println("Which Gate?");
                             line = br.readLine();
                             m.levels.get(m.currentLevel).u_p_c.RemoveGate((SpecialRail) m.levels.get(m.currentLevel).rails.get(Integer.parseInt(line) -1));
                         }
                         break;
                     case "4":
-                        m.levels.get(m.currentLevel).rails.get(5).ChangeGate();
+                        if(gameHasStarted) {
+                            bela = 2;
+                            for(Rail r : m.levels.get((m.currentLevel)).rails ){
+                                r.AskID(bela);
+                            }
+                            System.out.println("Which Gate?");
+                            line = br.readLine();
+                            m.levels.get(m.currentLevel).rails.get(Integer.parseInt(line) -1).ChangeGate();
+                        }
                         break;
                     case "5":
                         if(gameHasStarted)
@@ -83,6 +109,13 @@ public class Program {
                         if(gameHasStarted)
                             m.NextLevel();
                         break;
+                    case "9":
+                        System.out.println("Which Level");
+                        line = br.readLine();
+                        m.currentLevel = Integer.parseInt(line) -1;
+
+
+                        break;
                 }
             }
         }
@@ -94,7 +127,8 @@ public class Program {
 
     public void Init (){
         //Pályák beolvasása
-        try{
+
+
             for(int i = 1; i <= LevelSzam; i++){
 
                 String levelname = "level" + i + ".txt";
@@ -102,10 +136,6 @@ public class Program {
                 levels.add(tmplevel);
             }
 
-
-        }catch(Exception e){
-
-        }
     }
 
     public void ExitGame (){
