@@ -134,7 +134,7 @@ public class Program {
 
     public void ExitGame (){
         int engCo = levels.get(currentLevel).GetEngineCount();
-        if(gameHasStarted && Emptytraincount == engCo){	//Ha j�t�kban vagyunk m�g / elindult-e a j�t�k
+        if(gameHasStarted && Emptytraincount == engCo){	//Ha jt�kban vagyunk m�g / elindult-e a j�t�k
             System.out.println("You Won!");
         }else{
             System.out.println("You Lost");

@@ -23,7 +23,7 @@ public class UnderPassCreator {
 		else if (railList.size() == 2)
 		{
 			railList.get(0).setNeighbours(underPassEdges.get(0), railList.get(1));
-			railList.get(1).setNeighbours(railList.get(0), underPassEdges.get(0));
+			railList.get(1).setNeighbours(railList.get(0), underPassEdges.get(1));
 		}
 		else
 		{
@@ -73,13 +73,15 @@ public class UnderPassCreator {
 		}
 
 	}
-	public boolean UPhasTrain (){// amĂ­g van vonat addig nem szĹ±nhet meg az alagĂşt
+	public boolean UPhasTrain(){// amĂ­g van vonat addig nem szĹ±nhet meg az alagĂşt
 		boolean hastrain = false;
 		for (int i=0; i < railList.size(); i++)
 		{
 			if (railList.get(i).HasTrain())
 				hastrain = true;
 		}
+		if (underPassEdges.get(0).HasTrain()|| underPassEdges.get(1).HasTrain())
+			hastrain = true;
 		return hastrain;
 	}
 	public void Remove ()

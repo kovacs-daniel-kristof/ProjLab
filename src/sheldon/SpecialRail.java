@@ -1,5 +1,7 @@
 package sheldon;
 
+import java.util.ArrayList;
+
 public class SpecialRail extends Rail{
 	boolean isActive = false;
 	Rail[] originalRails = neighbours;
@@ -20,7 +22,7 @@ public class SpecialRail extends Rail{
 		{
 			if (r == neighbours[0]) //jön ki az alagútból
 				return originalRails[nextRailIndex];
-			else
+			else					//megy be az alagútba
 				return neighbours[0];
 		}
 	}
@@ -28,6 +30,12 @@ public class SpecialRail extends Rail{
 	public void setNeighbours(Rail r1, Rail r2){
 		neighbours[0] = r1;
 		neighbours[1] = r2;
+		originalRails = neighbours;
+	}
+
+	public void setNeighbours(ArrayList<Rail> railek, int allas){
+		neighbours[0] = railek.get(0);
+		neighbours[1] = railek.get(1);
 		originalRails = neighbours;
 	}
 
