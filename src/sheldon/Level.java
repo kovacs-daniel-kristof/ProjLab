@@ -62,7 +62,7 @@ public class Level {
 			e.printStackTrace();
 		}
 
-		try (BufferedReader br = new BufferedReader(new FileReader(levelname))) {
+		try (BufferedReader br = new BufferedReader(new FileReader(trainname))) {
 
 			String CurrentLine;
 			/*
@@ -89,6 +89,7 @@ public class Level {
 					train = new CoalCargo();
 				}
 				train.currentRail = rails.get(Integer.parseInt(splitted[1]) - 1);
+				rails.get(Integer.parseInt(splitted[1]) - 1).AddTrainToRail(train);
 				if(Integer.parseInt(splitted[6]) == 1){
 					haspassanger++;
 				}
