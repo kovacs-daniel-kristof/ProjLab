@@ -7,10 +7,31 @@ public class Rail {
 	Rail[] neighbours = new Rail[2];
 	TrainPart myTrainPart;
     private Rail[] neig;
+    protected int ID;
 
     public Rail(){
 	}
+    
+    public void ID_des (int D){
+		ID = D;
+	}
+	public int ID_rep (){
+		return ID;
+	}
 
+	public void setWaitingPassengers (ArrayList<Color> wp){	
+}
+	
+	public void setNeighbourSwitch( ArrayList<Rail> jc){
+
+}
+	
+public void Activate(){
+}
+
+public void setNeighbours2(Rail r1, Rail r2){
+}
+    
 	public Rail GetNextRail (Rail r){
 		if(neighbours[0] == r)
 			return neighbours[1];
@@ -20,7 +41,7 @@ public class Rail {
 	public boolean CompareColors(Color c){
 		return false;
 	}
-	public void AddTrainToRail (TrainPart tp){ // ha egyszerre több vonat lenne a sinen akkor ütközés --> a játék véget ér
+	public void AddTrainToRail (TrainPart tp){ // ha egyszerre t�bb vonat lenne a sinen akkor �tk�z�s --> a j�t�k v�get �r
 		if(myTrainPart != null){
 			Program.GameOver();
 		}else{

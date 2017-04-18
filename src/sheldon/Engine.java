@@ -14,6 +14,7 @@ hasPassengers=false;
 
 	public void Move (){ // mivel a Train Part specializációja ezért a current rail segítségével el tudja dönteni hogy hova kell lépnie
         Rail nextrail;
+
         Rail tmp = currentRail;
         nextrail=currentRail.GetNextRail(previousRail); // elmentjük a következő sínt
         tmp.Clear();//lelépünk a sínről
@@ -22,14 +23,11 @@ hasPassengers=false;
 
 
         if(HasNextTrain()){
-            MoveToRail(tmp); // ha van mögötte kocsi azon meghívjuk a mozgatást
+            behindMe.MoveToRail(tmp); // ha van mögötte kocsi azon meghívjuk a mozgatást
         }
         currentRail.AddTrainToRail(this); // a következő sínhez beállítjuk a vonatot ráléptetjük
 
 	}
-
-
-    public void setPreviousRail(Rail r){
-        previousRail = r;
-	}
+   
+	public void setPreviousRail(Rail r){ previousRail = r;}
 }

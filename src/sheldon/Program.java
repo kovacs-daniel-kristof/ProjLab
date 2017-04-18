@@ -1,54 +1,30 @@
 package sheldon;
-import java.io.*;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Timer;
 import java.util.TimerTask;
-
-
-
-/*
- * Change Switch
-1.1 van a switchen vonat ? Y/N
-Add Gate
-2.1 van a special railen vonat ? Y/N
-2.2 H�ny kapu van lerakva ? 0/1/2
-3. Remove Gate
-3.1 van akt�v alag�t ? Y/N
-3.2 van vonat az alag�tban ? Y/N
-4. Move Engine
-4.1 van e �tk�z�s ? Y/N
-5. Move Carriage
-5.1 �llom�son �ll? Y/N
-5.2 A kocsi sz�ne megegyezik az �llom�s sz�n�vel ?  Y/N
-5.3 Lesz�lltak  m�r az el�z� kocsikr�l? Y/N
-5.4 Van utas a kocsin ? Y/N
-5.5 van m�g�tte kocsi ? Y/N
-6. Start Game
-7.Exit Game
-7.1 Nyert a j�t�kos ? Y/N
-8. Level Complete
-8.1 Van k�vetkez� p�lya? Y/N
- */
 
 public class Program {
     static boolean gameHasStarted = false;
-    public int LevelSzam = 3;
+    public int LevelSzam = 9;
     public int currentLevel = 0;
     static int Emptytraincount = 0;
     public ArrayList<Level> levels = new ArrayList<Level>();
     static public Program m;
-    //public ArrayList<Level> levelList = new ArrayList<Level>();
-
-    public class MoveTrains extends TimerTask {
-
-        @Override
-        public void run() {
-            // TODO Auto-generated method stub
-            Program.m.levels.get(Program.m.currentLevel).MoveEngines();
-        }
 
 
-    }
+//    public class MoveTrains extends TimerTask {
+//
+//        @Override
+//        public void run() {
+//            // TODO Auto-generated method stub
+//            Program.m.levels.get(Program.m.currentLevel).MoveEngines();
+//        }
+//
+//
+//    }
 
     static public void main (String[] args){
         m = new Program();
@@ -122,8 +98,7 @@ public class Program {
             for(int i = 1; i <= LevelSzam; i++){
 
                 String levelname = "level" + i + ".txt";
-                String trainname = "train" + i + ".txt";
-                Level tmplevel = new Level(levelname, trainname);
+                Level tmplevel = new Level(levelname);
                 levels.add(tmplevel);
             }
 
@@ -173,8 +148,9 @@ public class Program {
 
     public void StartGame(){
         gameHasStarted = true;
-        Timer timer = new Timer();
-        timer.schedule(new MoveTrains(), 0, 500);
+//        Timer timer = new Timer();
+//        timer.schedule(new MoveTrains(), 0, 500);
+        
     }
 
     static public void GameOver (){
