@@ -1,6 +1,7 @@
 package sheldon;
 
 import java.util.Random;
+import java.util.ArrayList;
 
 public class Rail {
 	Rail[] neighbours = new Rail[2];
@@ -36,9 +37,9 @@ public class Rail {
 			return true;
 		}
 	}
-	public void setNeighbours(Rail r1, Rail r2){
-		neighbours[0] = r1;
-		neighbours[1] = r2;
+	public void setNeighbours(ArrayList<Rail> railek, int allas){
+		neighbours[0] = railek.get(0);
+		neighbours[1] = railek.get(1);
 	}
 
 	public boolean hasWaitingPassengers(){
