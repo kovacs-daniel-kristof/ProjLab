@@ -80,21 +80,23 @@ public class Level {
 					TrainPart train = null;
 				if(Integer.parseInt(splitted[5]) == 1){//engine
 					train = new Engine();
+					train.myColor = Color.NONE;
 				}
 				if(Integer.parseInt(splitted[5]) == 2){ //carriage
 					train = new Carriage();
-
+					train.myColor = Color.valueOf(splitted[5]);
 				}
 				if(Integer.parseInt(splitted[5]) == 3){ //CoalCargo
 					train = new CoalCargo();
+					train.myColor = Color.NONE;
 				}
 				train.currentRail = rails.get(Integer.parseInt(splitted[1]) - 1);
 				rails.get(Integer.parseInt(splitted[1]) - 1).AddTrainToRail(train);
-				if(Integer.parseInt(splitted[6]) == 1){
+				if(Integer.parseInt(splitted[6]) == 0){
 					haspassanger++;
 				}
 				train.hasPassengers = Integer.parseInt(splitted[6]) == 1;
-				train.myColor = Color.valueOf(splitted[5]);
+
 				train.inFrontOfMe = null;
 				train.behindMe = null;
 				trainparts.add(train);
@@ -107,6 +109,10 @@ public class Level {
 				}
 				if(Integer.parseInt(splitted[3]) != 0){
 					trainparts.get(i).behindMe = trainparts.get(Integer.parseInt(splitted[3]) -1 );
+				}
+				if(Integer.parseInt(splitted[5]) == 1){//engine
+
+					trainparts.get(i).setPreviousRail(trainparts.get(i).behindMe.currentRail);
 				}
 			}
 

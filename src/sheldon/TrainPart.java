@@ -33,7 +33,7 @@ protected Color myColor;
 		else
 			return false;
 	}
-
+	public void setPreviousRail(Rail r){}
 
 
 
