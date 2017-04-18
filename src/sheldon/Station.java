@@ -55,4 +55,3 @@ public boolean passengerGetOn(Color c) {   //a c szinu kocsira szallank e fel ut
 
 
 }
-

@@ -2,9 +2,6 @@ package sheldon;
 
 import java.util.ArrayList;
 
-/**
- * Created by szabo on 15/04/2017.
- */
 public class Crossing extends Rail{
     Rail[] neighbours2 = new Rail[2];
 

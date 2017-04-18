@@ -9,6 +9,9 @@ public class Switch extends Rail {
 	public Switch(){
 		n=0;
 	}
+	
+
+	
 	public void ChangeDirection(){
 		if(!this.HasTrain()){
 			if(n < junctions.size()-1)
@@ -31,4 +34,3 @@ public class Switch extends Rail {
 
 
 }
-
