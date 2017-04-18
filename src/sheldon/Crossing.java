@@ -22,6 +22,10 @@ public class Crossing extends Rail{
             return neighbours2[0];
     }
 
-
+    public void AskID (int a){
+        if(a == 0 || a == 2) {
+            System.out.println("Crossing, ID : " + ID);
+        }
+    }
 
 }

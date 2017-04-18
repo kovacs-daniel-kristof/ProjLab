@@ -45,6 +45,7 @@ public class Program {
                 System.out.println("7 - Exit Game");
                 System.out.println("8 - Level Complete(?)");
                 System.out.println("9 - Switch Level");
+                System.out.println("10 - Get Current Train");
                 String line;
                 line = br.readLine();
                 int bela = 0;
@@ -110,6 +111,16 @@ public class Program {
                             m.NextLevel();
                         break;
                     case "9":
+                        System.out.println("Which Level");
+                        line = br.readLine();
+                        m.currentLevel = Integer.parseInt(line) -1;
+
+
+                        break;
+                    case "10":
+                        for(Rail r : m.levels.get((m.currentLevel)).rails ){
+                            r.getMyTrainPart().AskDetails();
+                        }
                         System.out.println("Which Level");
                         line = br.readLine();
                         m.currentLevel = Integer.parseInt(line) -1;
