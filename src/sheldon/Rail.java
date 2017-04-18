@@ -6,8 +6,9 @@ import java.util.ArrayList;
 public class Rail {
 	Rail[] neighbours = new Rail[2];
 	TrainPart myTrainPart;
+    private Rail[] neig;
 
-	public Rail(){
+    public Rail(){
 	}
 
 	public Rail GetNextRail (Rail r){
@@ -41,6 +42,11 @@ public class Rail {
 		neighbours[0] = railek.get(0);
 		neighbours[1] = railek.get(1);
 	}
+
+	public void setNeighbours(Rail nb1, Rail nb2){
+        neighbours[0] = nb1;
+        neighbours[1] = nb2;
+    }
 
 	public boolean hasWaitingPassengers(){
 		return false;
