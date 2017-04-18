@@ -32,6 +32,10 @@ hasPassengers=false;
         currentRail.AddTrainToRail(this); // a következő sínhez beállítjuk a vonatot ráléptetjük
 
 	}//
+
+    public void AskDetails(){
+        System.out.println("ID: " + ID + " Type: Engine " + " b_t_ID: " + behindMe.ID + " in_front_ID: " + inFrontOfMe.ID + " Curr_R: " + currentRail.ID);
+    }
    
 	public void setPreviousRail(Rail r){ previousRail = r;}
 }

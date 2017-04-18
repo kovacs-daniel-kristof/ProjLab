@@ -35,6 +35,11 @@ public void AskID (int a){
 public void Activate(){
 }
 
+public TrainPart getMyTrainPart(){
+	return myTrainPart;
+
+}
+
 public void setNeighbours2(Rail r1, Rail r2){
 }
     

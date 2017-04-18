@@ -28,6 +28,12 @@ public class Station extends Rail {
 			return false;
 	}
 
+	public void AskID (int a){
+		if(a == 0) {
+			System.out.println("Station, ID : " + ID);
+		}
+	}
+
 public boolean passengerGetOn(Color c) {   //a c szinu kocsira szallank e fel utasok. True a visszateres ha felszalltak utasok, false ha nem
     boolean ret = false;
 

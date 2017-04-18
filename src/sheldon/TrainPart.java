@@ -80,6 +80,9 @@ public void ModifyCol (Color a){
 	public  void Move(){
 		
     }
+	//ID, Type, behind_T_ID, in_Front_T_ID, prev_R_ID, curr_R_ID
+    public void AskDetails(){
+	}
 
     public Color getMyColor() {
         return myColor;

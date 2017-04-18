@@ -4,6 +4,10 @@ public class Carriage extends TrainPart{
 	public Carriage(){
 	}
 
+	public void AskDetails(){
+		System.out.println("ID: " + ID + " Type: Carriage " + " b_t_ID: " + behindMe.ID + " in_front_ID: " + inFrontOfMe.ID + " Curr_R: " + currentRail.ID);
+	}
+
 public void MoveToRail (Rail next){ // következő sínre mozgat
 	Rail tmp=currentRail; // tmpbe tároljuk azt a sínt ahonnan ellépünk
 	currentRail=next; // a current rail az lesz ahová lépünk
@@ -14,6 +18,8 @@ public void MoveToRail (Rail next){ // következő sínre mozgat
 		// ha van mögött kocsi akkor rekurzívan azon is meghívjuk a mozgatásta
 	}
 	boolean isSameColor = currentRail.CompareColors(myColor);//my color összehasonlítása
+
+
 		//leszállás
 	if(!inFrontOfMe.HasPassenger() && HasPassenger()){
 			if(isSameColor){
