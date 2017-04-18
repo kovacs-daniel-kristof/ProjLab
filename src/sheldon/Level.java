@@ -81,21 +81,25 @@ public class Level {
 				if(Integer.parseInt(splitted[5]) == 1){//engine
 					train = new Engine();
 					train.myColor = Color.NONE;
+					haspassanger++;
 				}
 				if(Integer.parseInt(splitted[5]) == 2){ //carriage
 					train = new Carriage();
 					train.myColor = Color.valueOf(splitted[5]);
+					train.hasPassengers = Integer.parseInt(splitted[6]) == 1;
+					if(Integer.parseInt(splitted[6]) == 0){
+						haspassanger++;
+					}
 				}
 				if(Integer.parseInt(splitted[5]) == 3){ //CoalCargo
 					train = new CoalCargo();
 					train.myColor = Color.NONE;
+					haspassanger++;
 				}
 				train.currentRail = rails.get(Integer.parseInt(splitted[1]) - 1);
 				rails.get(Integer.parseInt(splitted[1]) - 1).AddTrainToRail(train);
-				if(Integer.parseInt(splitted[6]) == 0){
-					haspassanger++;
-				}
-				train.hasPassengers = Integer.parseInt(splitted[6]) == 1;
+
+
 
 				train.inFrontOfMe = null;
 				train.behindMe = null;
