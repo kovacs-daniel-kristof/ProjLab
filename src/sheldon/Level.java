@@ -27,8 +27,9 @@ public class Level {
 			while ((CurrentLine = br.readLine()) != null) {
 
 				readedrail.add(CurrentLine);
-				String[] splitted = CurrentLine.split(" ");
+				String[] splitted = CurrentLine.split(",");
 				Rail temprail = null;
+				//létrehozzuk a Rail típúsokat,
 				if(Integer.parseInt(splitted[1]) == 1){
 					temprail = new Rail();
 				}
@@ -49,11 +50,11 @@ public class Level {
 				rails.add(temprail);
 			}
 			for(int i = 0; i < readedrail.size(); i++){
-				String[] splitted = readedrail.get(i).split(" ");
+				String[] splitted = readedrail.get(i).split(",");
 				ArrayList<Rail> railek = new ArrayList<Rail>();
 				for(int j = 4; j < splitted.length; j++)
 					railek.add(rails.get(Integer.parseInt(splitted[j])));
-
+				//beállítjuk a railek elöte, utána lévő Railjeit
 				rails.get(i).setNeighbours(railek, Integer.parseInt(splitted[3]));
 //
 			}
@@ -76,7 +77,7 @@ public class Level {
 			ArrayList<String> readed = new ArrayList<String>();
 			while ((CurrentLine = br.readLine()) != null) {
 				readed.add(CurrentLine);
-				String[] splitted = CurrentLine.split(" ");
+				String[] splitted = CurrentLine.split(",");
 					TrainPart train = null;
 				if(Integer.parseInt(splitted[5]) == 1){//engine
 					train = new Engine();
@@ -106,8 +107,9 @@ public class Level {
 				trainparts.add(train);
 
 			}
+			//
 			for(int i = 0; i < readed.size(); i++){
-				String[] splitted = readed.get(i).split(" ");
+				String[] splitted = readed.get(i).split(",");
 				if(Integer.parseInt(splitted[2]) != 0){
 					trainparts.get(i).inFrontOfMe = trainparts.get(Integer.parseInt(splitted[2]) -1 );
 				}
