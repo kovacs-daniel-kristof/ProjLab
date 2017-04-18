@@ -34,10 +34,10 @@ public boolean passengerGetOn(Color c) {   //a c szinu kocsira szallank e fel ut
     for(int i =0; i<waitingPassengers.size();i++){  //megnezzuk hogy a varakozok kozul ki szallhat fel. Mindenkepp vegig nezzuk a listat, mert tobben is felszallhatnak, de a visszateresi erteknel ezt nem kell jelolni
         if(waitingPassengers.get(i).equals(c)){
 
-            if(RandomGenerate()){                      //random generator, hogy felszall-e
+            //if(RandomGenerate()){                      //random generator, hogy felszall-e
                 waitingPassengers.remove(i);        //ha felszallt, akkor kivesszuk a varakozok kozul
                 ret = true;
-            }
+            //}
         }
     }
     return ret;
