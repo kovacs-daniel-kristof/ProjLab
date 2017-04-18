@@ -20,15 +20,24 @@ public int ID_rep (){
 }
 
 public void StandardStartup (TrainPart a,TrainPart b,Rail c ,boolean Hasp){
-	behindMe = a;
-	inFrontOfMe = b;
-	currentRail = c;
+	if(a.ID_rep() != 0){
+		behindMe = a;
+	}
+	if(b.ID_rep() != 0) {
+		inFrontOfMe = b;
+	}
+	if(c.ID_rep() != 0){
+		currentRail = c;
+	}
 	hasPassengers = Hasp;
 }
 
 public void ModifyPrevRail (Rail r){
 	
 }
+	public void StartSet (int a){
+
+	}
 public void ModifyCol (Color a){
 	myColor = a;
 }

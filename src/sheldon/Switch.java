@@ -31,6 +31,13 @@ public class Switch extends Rail {
 		neighbours[1] = junctions.get(n);
 
 	}
+	@Override
+	public void AskID (int a){
+		System.out.println("belep, " + a);
+		if(a == 0 || a == 1) {
+			System.out.println("Switch, ID : " + ID);
+		}
+	}
 
 
 }

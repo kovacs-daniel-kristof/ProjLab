@@ -3,6 +3,7 @@ package sheldon;
 public class Engine extends TrainPart {
 
     protected Rail previousRail;
+    protected int startAt;
 
 public Engine(){
 hasPassengers=false;
@@ -11,6 +12,9 @@ hasPassengers=false;
 	public void MoveToRail(Rail next) {
 
 	}
+	public void StartSet (int a){
+    startAt = a;
+    }
 
 	public void Move (){ // mivel a Train Part specializációja ezért a current rail segítségével el tudja dönteni hogy hova kell lépnie
         Rail nextrail;
@@ -27,7 +31,7 @@ hasPassengers=false;
         }
         currentRail.AddTrainToRail(this); // a következő sínhez beállítjuk a vonatot ráléptetjük
 
-	}
+	}//
    
 	public void setPreviousRail(Rail r){ previousRail = r;}
 }
