@@ -57,8 +57,8 @@ public class Level {
 					break;
 				case 5:
 					train = new Engine();
-					/*train.myColor = Color.NONE;
-					haspassanger++;*/
+					/*train.myColor = Color.NONE;*/
+					haspassanger++;
 					 RailCreated = false;
 					 train.ID_des(ID__);
 					break;
@@ -66,16 +66,17 @@ public class Level {
 					train = new Carriage();
 					/*train.myColor = Color.valueOf(splitted[5]);
 					train.hasPassengers = Integer.parseInt(splitted[6]) == 1;
-					if(Integer.parseInt(splitted[6]) == 0){
+					*/
+					if(Integer.parseInt(splitted[5]) == 0){
 						haspassanger++;
-					}*/
+					}
 					 RailCreated = false;
 					 train.ID_des(ID__);
 					break;
 				case 7:
 					train = new CoalCargo();
-					/*train.myColor = Color.NONE;
-					haspassanger++;*/
+					/*train.myColor = Color.NONE;*/
+					haspassanger++;
 					RailCreated = false;
 					 train.ID_des(ID__);
 					break;
@@ -121,11 +122,12 @@ public class Level {
 							}
 						}
 						if(!(splitted[3].trim()).equals("null")) {
-							if (splitted[3] != "null" && r.ID_rep() == Integer.parseInt(splitted[3])) {            ///masodik szomszed
+							if (r.ID_rep() == Integer.parseInt(splitted[3])) {            ///masodik szomszed
 								ketto = r;
 							}
 						}
 					}
+					//System.out.println(ketto);
 					temprail.setNeighbours(egy, ketto);
 					if(Integer.parseInt(splitted[4]) == 1){				//ha van rajta vonat
 						TrainPart a = null;
@@ -165,7 +167,22 @@ public class Level {
 					}
 					
 					if(	Integer.parseInt(splitted[1]) == 3){//specialrail
-						temprail.Activate();
+						Rail specialOne = null;
+						Rail specialTwo = null;
+						for(Rail r : rails){
+
+							if(!(splitted[2].trim()).equals("null")) {
+								if (r.ID_rep() == Integer.parseInt(splitted[2])) {            //Elso szomszed
+									specialOne = r;
+								}
+							}
+							if(!(splitted[3].trim()).equals("null")) {
+								if (r.ID_rep() == Integer.parseInt(splitted[3])) {            ///masodik szomszed
+									specialTwo = r;
+								}
+							}
+						}
+						temprail.setOR(specialOne, specialTwo);			//Original rails hangolása
 					}
 					if(	Integer.parseInt(splitted[1]) == 4){//Crossing
 						Rail harom = null;

@@ -13,12 +13,28 @@ public class UnderPassCreator {
 
 	public void Generate () //amikor egyik special rail se aktĂ­v akkor a special rail-bĹ‘l kapu lesz
 	{
-
+		System.out.println("Creating...");
 		for (int i = 0; i < temporaryUPLength; i++) //létrehozza az alagútban levő síneket
 		{
 			railList.add(new Rail());
 		}
-		if (railList.size() == 1)
+		underPassEdges.get(0).setNeighbours(underPassEdges.get(0).neighbours[0],railList.get(0));	//udnerpassEdgesnek 0as szomszédját kapja + railList elso elemét
+		underPassEdges.get(1).setNeighbours(underPassEdges.get(1).neighbours[0],railList.get(temporaryUPLength-1));
+
+		for(int i = 0; i < temporaryUPLength; i++){
+			if(i == 0) {
+				railList.get(i).setNeighbours(underPassEdges.get(0),railList.get(1));
+			}else {
+				if(i == temporaryUPLength-1) {
+					railList.get(i).setNeighbours(underPassEdges.get(1),railList.get(temporaryUPLength-1));
+				}else {
+					railList.get(i).setNeighbours(railList.get(i - 1), railList.get(i + 1));
+				}
+			}
+
+		}
+
+		/*if (railList.size() == 1)
 			railList.get(0).setNeighbours(underPassEdges.get(0), underPassEdges.get(1));
 		else if (railList.size() == 2)
 		{
@@ -35,41 +51,41 @@ public class UnderPassCreator {
 			railList.get(railList.size()-1).setNeighbours(railList.get(railList.size()-2), underPassEdges.get(1));
 		}
 		underPassEdges.get(0).setNeighbours(railList.get(0), null);
-		underPassEdges.get(1).setNeighbours(railList.get(railList.size()-1), null);
+		underPassEdges.get(1).setNeighbours(railList.get(railList.size()-1), null);*/
 
 	}
 
 	public void AddGate (SpecialRail newSpecialRail){
-		int railsActive = GetSpecialRailActive();
+		int railsActive = underPassEdges.size();
 		if(railsActive == 0)	//amikor egyik special rail se aktĂ­v akkor a special rail-bĹ‘l kapu lesz
 		{
 			underPassEdges.add(newSpecialRail);
 		}
 		if(railsActive == 1) // ha mĂˇr van egy kapu akkor is krelĂłdik mĂ©g egy, ezutĂˇn pedig lĂ©trejĂ¶n az alagĂşt a kĂ©t kapu kĂ¶zĂ¶tt
 		{
-			underPassEdges.add(newSpecialRail);
-			Generate();
-			underPassEdges.get(0).Activate();
-			underPassEdges.get(1).Activate();
+			if(!underPassEdges.get(0).equals(newSpecialRail)) {
+				underPassEdges.add(newSpecialRail);
+				Generate();
+			}
+			//underPassEdges.get(0).Activate();
+			//underPassEdges.get(1).Activate();
 			// ha mĂˇr 2 kapu van akkor nem tud tovĂˇbbit hozzĂˇadni
 		}
 	}
-	public int GetSpecialRailActive (){
 
-		return underPassEdges.size();// megadja hogy jelenleg hĂˇny special rail viselkedik kapukĂ©nt
-	}
 	public void RemoveGate (SpecialRail specialRailToRemove){
-		int gates = GetSpecialRailActive();
+		int gates =  underPassEdges.size();
 		if (gates == 1)
 		{
 			underPassEdges.remove(specialRailToRemove);
 		}
 		if(gates == 2 && !UPhasTrain())
 		{
-			underPassEdges.get(0).Deactivate();
-			underPassEdges.get(1).Deactivate();
-			underPassEdges.remove(specialRailToRemove);
+			System.out.println("Destroying...");
+			//underPassEdges.get(0).Deactivate();
+			//underPassEdges.get(1).Deactivate();
 			Remove();
+			underPassEdges.remove(specialRailToRemove);
 		}
 
 	}
@@ -86,6 +102,8 @@ public class UnderPassCreator {
 	}
 	public void Remove ()
 	{
+		underPassEdges.get(0).setORback();
+		underPassEdges.get(1).setORback();
 		railList.clear();
 	}
 }

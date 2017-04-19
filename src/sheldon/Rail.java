@@ -26,6 +26,13 @@ public class Rail {
 
 }
 
+public void setOR(Rail a, Rail b){
+
+}
+public void setORback () {
+
+}
+
 public void AskID (int a){
 		if(a == 0) {
 			System.out.println("Rail, ID : " + ID);
@@ -52,6 +59,7 @@ public void setNeighbours2(Rail r1, Rail r2){
 	public boolean CompareColors(Color c){
 		return false;
 	}
+
 	public void AddTrainToRail (TrainPart tp){ // ha egyszerre t�bb vonat lenne a sinen akkor �tk�z�s --> a j�t�k v�get �r
 		if(myTrainPart != null){
 			Program.GameOver();
@@ -76,8 +84,10 @@ public void setNeighbours2(Rail r1, Rail r2){
 	}
 
 	public void setNeighbours(Rail nb1, Rail nb2){
-        neighbours[0] = nb1;
-        neighbours[1] = nb2;
+		Rail[] rali = new Rail[] {nb1,nb2};
+		neighbours = rali;
+       /* neighbours[0] = nb1; ////FUUUUUUUUUUUUUUUUUUUUUUCCCCCCCCCCCCCCKKKKKKKKKKKKKKKKKKKKK
+        neighbours[1] = nb2;*/
     }
 
 	public boolean hasWaitingPassengers(){

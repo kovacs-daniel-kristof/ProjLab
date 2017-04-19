@@ -45,7 +45,8 @@ public class Program {
                 System.out.println("7 - Exit Game");
                 System.out.println("8 - Level Complete(?)");
                 System.out.println("9 - Switch Level");
-                System.out.println("10 - Get Current Train");
+                if(gameHasStarted)
+                    System.out.println("10 - Get Current Train");
                 String line;
                 line = br.readLine();
                 int bela = 0;
@@ -118,12 +119,23 @@ public class Program {
 
                         break;
                     case "10":
+                        bela = 0;
                         for(Rail r : m.levels.get((m.currentLevel)).rails ){
-                            r.getMyTrainPart().AskDetails();
+                            r.AskID(bela);
                         }
-                        System.out.println("Which Level");
+                        System.out.println("Which Rail?");
                         line = br.readLine();
-                        m.currentLevel = Integer.parseInt(line) -1;
+                        Rail templatessj = null;
+                        for(Rail r : m.levels.get((m.currentLevel)).rails ){
+                            if(r.ID_rep() == Integer.parseInt(line)){
+                                templatessj = r;
+                            }
+                        }
+                        if(templatessj.getMyTrainPart() != null)
+                            templatessj.getMyTrainPart().AskDetails();
+                        else{
+                            System.out.println("null");
+                        }
 
 
                         break;
@@ -138,15 +150,12 @@ public class Program {
 
     public void Init (){
         //Pályák beolvasása
-
-
-            for(int i = 1; i <= LevelSzam; i++){
+   for(int i = 1; i <= LevelSzam; i++){
 
                 String levelname = "level" + i + ".txt";
                 Level tmplevel = new Level(levelname);
                 levels.add(tmplevel);
             }
-
     }
 
     public void ExitGame (){
@@ -183,7 +192,7 @@ public class Program {
                 StartGame();
             }
         }else{
-            System.out.println("There are more trains to empty!");
+            System.out.println("There are more trains to empty!");//
         }
     }
 

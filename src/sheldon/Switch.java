@@ -20,7 +20,14 @@ public class Switch extends Rail {
 				n = 0;
 
 			neighbours[1] = junctions.get(n);
+		}else{
+			System.out.println("Can not change switch.");
 		}
+	}
+
+
+	public void setNeighbourSwitch( ArrayList<Rail> jc){
+		junctions = jc;
 	}
 
 	public void setNeighbours(ArrayList<Rail> railek, int allas){
@@ -33,7 +40,6 @@ public class Switch extends Rail {
 	}
 	@Override
 	public void AskID (int a){
-		System.out.println("belep, " + a);
 		if(a == 0 || a == 1) {
 			System.out.println("Switch, ID : " + ID);
 		}
